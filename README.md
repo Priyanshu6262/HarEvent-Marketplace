@@ -2,7 +2,8 @@
 
 > Full-Stack Event & Vendor Listing Platform for HarEvent LLP.
 
-**Live Backend API on Render:** [https://harevent-marketplace.onrender.com](https://harevent-marketplace.onrender.com)  
+**Live Frontend (Vercel):** [https://har-event-marketplace.vercel.app](https://har-event-marketplace.vercel.app)  
+**Live Backend API (Render):** [https://harevent-marketplace.onrender.com](https://harevent-marketplace.onrender.com)  
 **API Health Status:** [https://harevent-marketplace.onrender.com/health](https://harevent-marketplace.onrender.com/health)  
 **Vendors Endpoint:** [https://harevent-marketplace.onrender.com/api/vendors](https://harevent-marketplace.onrender.com/api/vendors)
 
