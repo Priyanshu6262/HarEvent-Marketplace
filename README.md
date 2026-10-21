@@ -2,6 +2,10 @@
 
 > Full-Stack Event & Vendor Listing Platform for HarEvent LLP.
 
+**Live Backend API on Render:** [https://harevent-marketplace.onrender.com](https://harevent-marketplace.onrender.com)  
+**API Health Status:** [https://harevent-marketplace.onrender.com/health](https://harevent-marketplace.onrender.com/health)  
+**Vendors Endpoint:** [https://harevent-marketplace.onrender.com/api/vendors](https://harevent-marketplace.onrender.com/api/vendors)
+
 A modern, responsive, and high-performance marketplace connecting clients with premier event vendors (photographers, decorators, caterers, planners, DJs, and makeup artists) across India.
 
 ---

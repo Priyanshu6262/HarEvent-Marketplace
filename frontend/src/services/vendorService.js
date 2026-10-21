@@ -1,7 +1,9 @@
-// Reusable API service module — all backend calls go through here.
-// Base URL is configured via VITE_API_BASE_URL in .env
-
-const BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000/api';
+// Base URL is configured via VITE_API_BASE_URL, defaulting to live Render backend in production
+const BASE_URL =
+  import.meta.env.VITE_API_BASE_URL ||
+  (import.meta.env.PROD
+    ? 'https://harevent-marketplace.onrender.com/api'
+    : 'http://localhost:5000/api');
 
 /**
  * Fetch all vendors, optionally filtered by search term, category, and city.

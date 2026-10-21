@@ -9,24 +9,10 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Allowed frontend origins
-const allowedOrigins = [
-  'http://localhost:5173',
-  'http://localhost:3000',
-  process.env.FRONTEND_URL,
-].filter(Boolean);
-
-// Middleware
+// CORS Middleware - enable for all origins on public read-only API
 app.use(
   cors({
-    origin: (origin, callback) => {
-      // Allow requests with no origin (e.g. curl, Postman)
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error(`CORS policy: origin ${origin} is not allowed`));
-      }
-    },
+    origin: '*',
     methods: ['GET', 'OPTIONS'],
     optionsSuccessStatus: 200,
   })
