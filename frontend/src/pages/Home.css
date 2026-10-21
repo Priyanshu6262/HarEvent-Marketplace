@@ -1,0 +1,12 @@
+.vendors-section {
+  background: var(--color-bg);
+}
+
+.vendors-section__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 2rem;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
