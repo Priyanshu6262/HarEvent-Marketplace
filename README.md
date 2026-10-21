@@ -2,12 +2,12 @@
 
 > Full-Stack Event & Vendor Listing Platform for HarEvent LLP.
 
-**Live Frontend (Vercel):** [https://har-event-marketplace.vercel.app](https://har-event-marketplace.vercel.app)  
-**Live Backend API (Render):** [https://harevent-marketplace.onrender.com](https://harevent-marketplace.onrender.com)  
-**API Health Status:** [https://harevent-marketplace.onrender.com/health](https://harevent-marketplace.onrender.com/health)  
-**Vendors Endpoint:** [https://harevent-marketplace.onrender.com/api/vendors](https://harevent-marketplace.onrender.com/api/vendors)
+## 🌐 Live Deployments
 
-A modern, responsive, and high-performance marketplace connecting clients with premier event vendors (photographers, decorators, caterers, planners, DJs, and makeup artists) across India.
+- **Frontend Live (Vercel):** [https://har-event-marketplace.vercel.app](https://har-event-marketplace.vercel.app)
+- **Backend Live (Render):** [https://harevent-marketplace.onrender.com](https://harevent-marketplace.onrender.com)
+- **API Health Check:** [https://harevent-marketplace.onrender.com/health](https://harevent-marketplace.onrender.com/health)
+- **Vendors Endpoint:** [https://harevent-marketplace.onrender.com/api/vendors](https://harevent-marketplace.onrender.com/api/vendors)
 
 ---
 
