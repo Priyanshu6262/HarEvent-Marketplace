@@ -8,16 +8,18 @@ import VendorCTA from '../components/VendorCTA';
 import useVendors from '../hooks/useVendors';
 import './Home.css';
 
-export default function Home({ headerSearch }) {
-  const { vendors, total, loading, error, filters, applyFilters, clearFilters } = useVendors(
-    headerSearch ? { search: headerSearch } : {}
-  );
+export default function Home() {
+  const { vendors, total, loading, error, filters, applyFilters, clearFilters } = useVendors({});
 
   const hasActiveFilters = !!(filters.search || filters.category || filters.city);
 
   const handleHeroSearch = useCallback(
     (newFilters) => {
-      applyFilters(newFilters);
+      // Map hero search shape { service, location } → vendor filters { search, city }
+      applyFilters({
+        search: newFilters.service || '',
+        city: newFilters.location || '',
+      });
     },
     [applyFilters]
   );

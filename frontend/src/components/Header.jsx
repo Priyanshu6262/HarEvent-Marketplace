@@ -1,154 +1,127 @@
-import { useState, useEffect, useRef } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { Menu, X, Search, ChevronDown } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { User, Menu, X } from 'lucide-react';
 import './Header.css';
 
-const navLinks = [
+const NAV_LINKS = [
   { label: 'Home', href: '/' },
-  { label: 'Explore Vendors', href: '/#vendors' },
-  { label: 'Categories', href: '/#categories' },
+  { label: 'Event Planner', href: '/#planner' },
+  { label: 'Event Category', href: '/#categories' },
+  { label: 'Venues', href: '/#venues' },
   { label: 'About Us', href: '/#about' },
 ];
 
-export default function Header({ onSearch }) {
+export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [searchValue, setSearchValue] = useState('');
   const [scrolled, setScrolled] = useState(false);
-  const navigate = useNavigate();
-  const searchRef = useRef(null);
+  const location = useLocation();
 
-  // Shrink header on scroll
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const handleSearch = (e) => {
-    e.preventDefault();
-    if (onSearch) onSearch(searchValue.trim());
-    // Navigate to home and scroll to vendors
-    navigate('/#vendors');
-  };
+  // Close mobile menu on route change
+  useEffect(() => {
+    setMenuOpen(false);
+  }, [location]);
 
   const handleNavClick = (href) => {
     setMenuOpen(false);
     if (href.includes('#')) {
       const id = href.split('#')[1];
       const el = document.getElementById(id);
-      if (el) {
-        el.scrollIntoView({ behavior: 'smooth' });
-      } else {
-        navigate(href);
-      }
-    } else {
-      navigate(href);
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
     }
   };
 
+  const isActive = (href) => {
+    if (href === '/') return location.pathname === '/';
+    return location.hash === href.split('#')[1]
+      ? true
+      : false;
+  };
+
   return (
-    <header className={`header${scrolled ? ' header--scrolled' : ''}`}>
+    <header className={`header${scrolled ? ' header--scrolled' : ''}`} role="banner">
       <div className="header__inner container">
         {/* Logo */}
-        <Link to="/" className="header__logo" aria-label="HarEvent Home">
-          <span className="header__logo-icon">🎊</span>
-          <div className="header__logo-text">
-            <span className="header__logo-brand">HarEvent</span>
-            <span className="header__logo-tagline">LLP</span>
-          </div>
+        <Link to="/" className="header__logo" aria-label="HarEvent — go to homepage">
+          <img
+            src="/assets/HarEvent Logo.png"
+            alt="HarEvent"
+            className="header__logo-img"
+            onError={(e) => {
+              e.target.style.display = 'none';
+              e.target.nextSibling.style.display = 'flex';
+            }}
+          />
+          <span className="header__logo-fallback" aria-hidden="true">
+            <span className="header__logo-brand">Har<span className="header__logo-brand--accent">Event</span></span>
+          </span>
         </Link>
 
         {/* Desktop Navigation */}
         <nav className="header__nav" aria-label="Primary navigation">
-          {navLinks.map((link) => (
-            <button
+          {NAV_LINKS.map((link) => (
+            <Link
               key={link.label}
-              className="header__nav-link"
+              to={link.href}
+              className={`header__nav-link${link.href === '/' && location.pathname === '/' && !location.hash ? ' header__nav-link--active' : ''}`}
               onClick={() => handleNavClick(link.href)}
             >
               {link.label}
-            </button>
+            </Link>
           ))}
         </nav>
 
-        {/* Search */}
-        <form className="header__search" onSubmit={handleSearch} role="search">
-          <div className="header__search-wrap">
-            <Search size={15} className="header__search-icon" />
-            <input
-              ref={searchRef}
-              type="text"
-              placeholder="Search vendors…"
-              value={searchValue}
-              onChange={(e) => setSearchValue(e.target.value)}
-              className="header__search-input"
-              aria-label="Search vendors"
-            />
-          </div>
-        </form>
+        {/* Profile Icon */}
+        <button
+          className="header__profile"
+          aria-label="User profile"
+          type="button"
+        >
+          <User size={20} aria-hidden="true" />
+        </button>
 
-        {/* Auth Buttons */}
-        <div className="header__actions">
-          <Link to="/login/customer" className="btn btn-outline btn-sm">
-            Customer Login
-          </Link>
-          <Link to="/login/vendor" className="btn btn-primary btn-sm">
-            Vendor Login
-          </Link>
-        </div>
-
-        {/* Hamburger */}
+        {/* Hamburger (mobile) */}
         <button
           className="header__hamburger"
           onClick={() => setMenuOpen(!menuOpen)}
-          aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+          aria-label={menuOpen ? 'Close navigation menu' : 'Open navigation menu'}
           aria-expanded={menuOpen}
+          aria-controls="mobile-menu"
+          type="button"
         >
-          {menuOpen ? <X size={22} /> : <Menu size={22} />}
+          {menuOpen ? <X size={22} aria-hidden="true" /> : <Menu size={22} aria-hidden="true" />}
         </button>
       </div>
 
       {/* Mobile Menu */}
-      <div className={`header__mobile-menu${menuOpen ? ' header__mobile-menu--open' : ''}`}>
-        <nav className="header__mobile-nav">
-          {navLinks.map((link) => (
-            <button
+      <div
+        id="mobile-menu"
+        className={`header__mobile${menuOpen ? ' header__mobile--open' : ''}`}
+        aria-hidden={!menuOpen}
+      >
+        <nav className="header__mobile-nav" aria-label="Mobile navigation">
+          {NAV_LINKS.map((link) => (
+            <Link
               key={link.label}
+              to={link.href}
               className="header__mobile-link"
               onClick={() => handleNavClick(link.href)}
             >
               {link.label}
-            </button>
+            </Link>
           ))}
         </nav>
-        <form className="header__mobile-search" onSubmit={handleSearch}>
-          <div className="header__search-wrap">
-            <Search size={15} className="header__search-icon" />
-            <input
-              type="text"
-              placeholder="Search vendors…"
-              value={searchValue}
-              onChange={(e) => setSearchValue(e.target.value)}
-              className="header__search-input"
-              aria-label="Search vendors"
-            />
-          </div>
-        </form>
-        <div className="header__mobile-actions">
-          <Link
-            to="/login/customer"
-            className="btn btn-outline"
-            onClick={() => setMenuOpen(false)}
-          >
-            Customer Login
-          </Link>
-          <Link
-            to="/login/vendor"
-            className="btn btn-primary"
-            onClick={() => setMenuOpen(false)}
-          >
-            Vendor Login
-          </Link>
+
+        <div className="header__mobile-footer">
+          <button className="header__mobile-profile" type="button" aria-label="User profile">
+            <User size={18} aria-hidden="true" />
+            <span>Profile</span>
+          </button>
         </div>
       </div>
     </header>

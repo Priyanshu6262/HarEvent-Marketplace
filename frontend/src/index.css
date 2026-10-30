@@ -3,27 +3,30 @@
    ============================================================ */
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;600;700&display=swap');
+@import "tailwindcss";
 
 /* ---- CSS Variables ---------------------------------------- */
 :root {
-  /* Brand Colours */
-  --color-primary: #c0392b;          /* Deep rose red — HarEvent brand */
-  --color-primary-light: #e74c3c;
-  --color-primary-dark: #922b21;
-  --color-accent: #f39c12;           /* Gold accent */
-  --color-accent-light: #f8c471;
+  /* ---- HarEvent Brand Palette (spec) ----------------------- */
+  --color-bg:             #FFF4E5;  /* Page background — warm cream   */
+  --color-primary:        #E6004C;  /* Primary pink                   */
+  --color-secondary:      #FF7A00;  /* Secondary orange                */
+  --color-text-primary:   #2B1020;  /* Deep plum                      */
+  --color-text-secondary: #5C4148;  /* Medium plum                    */
+  --color-text-muted:     #806C78;  /* Light plum                     */
+  --color-stroke-light:   #F2D8E1;  /* Light pink border              */
+  --color-tag-bg:         #FFF0F5;  /* Pink tag background            */
+  --color-btn-secondary:  #FFF4E5;  /* Secondary button bg            */
+  --color-surface:        #FFFFFF;  /* White surface                  */
 
-  /* Neutrals */
-  --color-bg: #fafaf9;
-  --color-surface: #ffffff;
-  --color-surface-alt: #f7f6f4;
-  --color-border: #e8e5e0;
-  --color-border-dark: #d0ccc5;
-
-  /* Text */
-  --color-text-primary: #1a1a1a;
-  --color-text-secondary: #5a5a5a;
-  --color-text-muted: #9a9a9a;
+  /* ---- Backward-compat aliases (used by other components) -- */
+  --color-primary-light: #ff3370;
+  --color-primary-dark:  #b0003a;
+  --color-accent:        #FF7A00;
+  --color-accent-light:  #ffab60;
+  --color-surface-alt:   #FFF4E5;
+  --color-border:        #F2D8E1;
+  --color-border-dark:   #e0b8c8;
   --color-text-on-primary: #ffffff;
 
   /* Typography */
@@ -44,7 +47,7 @@
   --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.04);
   --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.10), 0 4px 8px rgba(0, 0, 0, 0.06);
   --shadow-xl: 0 20px 50px rgba(0, 0, 0, 0.12);
-  --shadow-primary: 0 4px 20px rgba(192, 57, 43, 0.3);
+  --shadow-primary: 0 4px 20px rgba(230, 0, 76, 0.28);
 
   /* Border Radius */
   --radius-sm: 6px;
@@ -60,7 +63,7 @@
 
   /* Layout */
   --max-width: 1280px;
-  --header-height: 70px;
+  --header-height: 68px;
 }
 
 /* ---- Reset & Base ------------------------------------------ */
@@ -77,7 +80,7 @@ html {
 
 body {
   font-family: var(--font-body);
-  background-color: var(--color-bg);
+  background-color: #FFF4E5;
   color: var(--color-text-primary);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
