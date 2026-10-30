@@ -8,7 +8,7 @@
   position: relative;
   width: 100%;
   /* Aspect ratio mirrors the reference image (1672:696 ≈ 2.4:1) at desktop */
-  min-height: 656px;
+  min-height: 666px;
   display: flex;
   align-items: center;
   overflow: hidden;
